@@ -2,14 +2,10 @@ import asyncio
 
 import uvicorn
 from fastapi import FastAPI, Depends
-from sqlalchemy import select
-from sqlalchemy.engine import ChunkedIteratorResult
-from sqlalchemy.ext.asyncio import AsyncSession
 from starlette import status
 from starlette.middleware.cors import CORSMiddleware
-from database.SqlAlchemyDatabase import get_session, init_models
+from database.SqlAlchemyDatabase import init_models
 from models import PostCreate
-from database.models import Post as SQLPost
 from models.models import PostUpdate
 from services.posts import PostsService
 
