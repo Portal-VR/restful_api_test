@@ -10,6 +10,7 @@ from starlette.middleware.cors import CORSMiddleware
 from database.SqlAlchemyDatabase import get_session, init_models
 from models import PostCreate
 from database.models import Post as SQLPost
+from models.models import PostUpdate
 from services.posts import PostsService
 
 app = FastAPI()
@@ -79,13 +80,14 @@ async def app_get_post(id: int, posts_service: PostsService = Depends()):
     tags=['Post'],
     description='Получает сущность поста'
 )
-async def app_update_post(id: int, db_session: AsyncSession = Depends(get_session)):
-    pass
+async def app_update_post(id: int, post: PostUpdate, posts_service: PostsService = Depends()):
+    result = await posts_service.update(id, post)
+    return {"status": "ok", "post": post}
 
 
 @app.delete(
     '/post/{id}',
-    status_code=status.HTTP_204_NO_CONTENT,
+    status_code=status.HTTP_200_OK,
     tags=['Post'],
     description='Удаляет пост'
 )
