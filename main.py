@@ -13,13 +13,21 @@ app.add_middleware(
     allow_headers=['*'],
 )
 
-@app.post(
+
+@app.get(
     '/post',
     status_code=status.HTTP_200_OK,
+    tags=['Post'],
+    description='Получает список постов'
+)
+async def get_posts():
+    pass
+
+@app.post(
+    '/post',
+    status_code=status.HTTP_201_CREATED,
     tags=['Post'],
     description='Создает сущность поста'
 )
 async def create_post():
     pass
-
-
