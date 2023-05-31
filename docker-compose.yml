@@ -5,12 +5,14 @@ services:
       - api_database
     ports:
       - "5000:5000"
+    environment:
+      - DATABASE_URL=mysql+asyncmy://root:root@api_database/mydb
 
   api_database:
     image: mysql:latest
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: mydb
-    ports:
-      - "3306:3306"
+      MYSQL_DATABASE: main_database
+    expose:
+      - "3306"
