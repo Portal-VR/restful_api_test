@@ -6,7 +6,7 @@ services:
     ports:
       - "5000:5000"
     environment:
-      - DATABASE_URL=mysql+asyncmy://root:root@api_database/mydb
+      - DATABASE_URL=mysql+asyncmy://root:root@api_database/main_database
 
   api_database:
     image: mysql:latest

@@ -14,6 +14,7 @@ SqlAlchemyBase = declarative_base()
 async_session_maker = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
 load_models()
 
+
 async def get_session() -> AsyncSession:
     """
     Create async session for work with database
