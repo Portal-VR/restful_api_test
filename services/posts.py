@@ -15,11 +15,7 @@ class PostsService:
         self.db_session = db_session
 
     async def get_many(self):
-        stmt_get_post_list = select(SQLPost)
-        query_post_list: ChunkedIteratorResult = await self.db_session.execute(stmt_get_post_list)
-        post_list = query_post_list.fetchall()
-        print(post_list)
-        return post_list
+        return (await self.db_session.execute(select(SQLPost))).scalars().all()
 
     async def get(self, post_id: int):
         stmt_get_post = select(SQLPost).where(
